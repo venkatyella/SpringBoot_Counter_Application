@@ -13,7 +13,7 @@
  ### 3.	Create Docker image for the spring boot app and run it as Docker container exporting the URL port (9090).
  
  
-        docker build -t springbootapp:latest .                                      #Built Docker Image 
+        docker build -t springbootapp .                                           #Build Docker Image 
   
         docker run -td --name springbootapp -p 9090:9090 springbootapp:latest    
         
