@@ -14,13 +14,30 @@
  
  
         docker build -t springbootapp .                                           #Build Docker Image 
-  
-        docker run -td --name springbootapp -p 9090:9090 springbootapp:latest    
         
+### STEP 1 >> Building Docker Image from Docker file
+    
+    docker image build -t sringbootapp .
+    docker image tag sringbootapp vikashashoke/sringbootapp:1.0             # Version 1.0 (Optionl for version maintaining i did & pushed to dockerHUb for Kubernetes)
+    docker image tag sringbootapp vikashashoke/sringbootapp:latest          # Version 1.0 Latest version
+    
+    
+### STEP 2 >> Pushing Docker Images to DockerHub
+
+    docker image push vikashashoke/sringbootapp:1.0          # Docker login needed before pushing the image
+    docker image push vikashashoke/sringbootapp:latest   
+
+
+
+### Running docker container with exposing port 9090
+
+     docker run -td --name springbootapp -p 9090:9090 springbootapp:latest    #Detached mode
+        
+      
         
 ### 4.	Create a deployment YAML file for Kubernetes and deploy it on Minikube.
 
-        
+
 ### Deployment.yml
    
       kind: Deployment
@@ -36,13 +53,42 @@
              metadata:
                labels:
                  app: myspringbootapp
-        spec:
-          containers:
-           - name: myspringbootapp
-             image: springbootapp:latest              # Docker Image we pushed to dockerHub now using here the same..
-             imagePullPolicy: Always
-             ports:
-             - containerPort: 80
+             spec:
+              containers:
+               - name: myspringbootapp
+                 image: vikashashoke/springbootapp:latest              # Docker Image we pushed to dockerHub now using here the same..
+                 imagePullPolicy: Always
+                 ports:
+                 - containerPort: 9090
+                 
+### Step 1 >> Running deployment.yml on minikube
+   
+      kubectl apply -f deployment.yml
+      
+      kubectl get deploy  mydeployment      
+      
+### service.yml  (Optional Just for testing not mentioned in test)
+
+     apiVersion: v1
+     kind: Service
+     metadata:
+        name: my-nodeport-service
+    spec:
+      selector:
+        app: myspringbootapp
+      type: NodePort
+      ports:
+       - name: http
+         port: 9090
+         targetPort: 9090
+         nodePort: 30036
+         protocol: TCP
+
+### Step 2 >> Exposing pods using service.yml (nodeport)
+
+
+      kubectl apply -f service.yml
+     
              
              
  
