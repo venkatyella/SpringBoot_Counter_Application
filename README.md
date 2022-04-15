@@ -3,11 +3,14 @@
  
  ### 1.	Create a spring boot app that prints “hello-world-$counter” ($counter should increment on every refresh)
  
- 
+          1. SpringBoot_Counter_Application generates jar named Uber.jar, same jar has been used in Dockerfile to build & deploy images. 
+          2. applications.properties contains the new port :9090 
+
  
  ### 2. Create an Uber jar for the spring boot app and execute your jar from the command line.
  
- 
+         1. mvn install              # Maven takes my springboot application and generated aftifacts(jar file inside 'target/Uber.jar' ), 
+         2. java - jar Uber.jar      # Executing the jar file
  
  
  ### 3.	Create Docker image for the spring boot app and run it as Docker container exporting the URL port (9090).
