@@ -35,6 +35,8 @@
 ### Running docker container with exposing port 9090
 
      docker run -td --name springbootapp -p 9090:9090 springbootapp:latest    #Detached mode
+     
+![image](https://user-images.githubusercontent.com/35370115/163572637-2004e425-29b3-470c-836d-a6e5c0541e8e.png)
         
       
         
