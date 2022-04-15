@@ -9,8 +9,8 @@
  
  ### 2. Create an Uber jar for the spring boot app and execute your jar from the command line.
  
-         1. mvn install              # Maven takes my springboot application and generated aftifacts(jar file inside 'target/Uber.jar' ), 
-         2. java -jar Uber.jar      # Executing the jar file
+         1. mvn install              # Maven takes my springboot application and generated aftifacts(jar file inside target directory named Uber.jar ), 
+         2. java -jar Uber.jar       # Executing the jar file
  
  
  ### 3.	Create Docker image for the spring boot app and run it as Docker container exporting the URL port (9090).
